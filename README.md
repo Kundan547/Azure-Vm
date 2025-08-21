@@ -2,9 +2,10 @@
 
 This repository provides a Terraform-based Infrastructure as Code (IaC) setup for provisioning Azure Virtual Machines along with a shell script to configure the VM with required dependencies (like Docker).
 
+📂 Repository Structure
 | File                 | Description                                                                                                            |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **provider.tf**      | Configures the Azure provider using service principal credentials.                                                     |
+| **provider.tf**      | Configures the Azure provider using variables or environment-based credentials.                                        |
 | **variables.tf**     | Defines all input variables for the Terraform configuration.                                                           |
 | **terraform.tfvars** | Stores the actual values for variables (e.g., resource group, location, VM size), keeping them separate from the code. |
 | **vm.tf**            | Main Terraform configuration file — provisions the Azure VM and its related resources.                                 |
@@ -15,6 +16,7 @@ This repository provides a Terraform-based Infrastructure as Code (IaC) setup fo
 git clone https://github.com/Kundan547/Azure-Vm.git
 cd Azure-Vm
 
+
 2️⃣ Configure Variables
 
 Update terraform.tfvars with your Azure values:
@@ -22,24 +24,23 @@ Update terraform.tfvars with your Azure values:
 resource_group_name = "my-resource-group"
 location            = "East US"
 vm_size             = "Standard_B1s"
+admin_username      = "azureuser"
+admin_password      = "YourStrongP@ssword!"
 
-3️⃣ Add Azure Credentials
+3️⃣ Setup Azure Credentials (Environment Variables)
 
-Edit provider.tf with your Azure service principal credentials:
+Instead of hardcoding credentials in provider.tf, export them as environment variables:
 
-provider "azurerm" {
-  features {}
-
-  subscription_id = "<your-subscription-id>"
-  client_id       = "<your-client-id>"
-  client_secret   = "<your-client-secret>"
-  tenant_id       = "<your-tenant-id>"
-}
+export ARM_SUBSCRIPTION_ID="your-subscription-id"
+export ARM_CLIENT_ID="your-client-id"
+export ARM_CLIENT_SECRET="your-client-secret"
+export ARM_TENANT_ID="your-tenant-id"
 
 
-👉 For better security, consider environment variables or Azure Key Vault instead of hardcoding secrets.
+Terraform automatically picks these values when running commands.
+👉 Safer than committing credentials in code.
 
-🏗️ Deployment Steps
+4️⃣ Deployment Steps
 # 1️⃣ Initialize Terraform (downloads providers and modules)
 terraform init
 
@@ -60,7 +61,7 @@ terraform destroy -auto-approve
 
 🔧 Post-Provisioning (VM Setup)
 
-Run the script to update packages and install dependencies (like Docker):
+Run the script inside the VM to update packages and install dependencies (like Docker):
 
 chmod +x script.sh
 ./script.sh
@@ -75,4 +76,4 @@ chmod +x script.sh
 
 🏗️ Terraform Version: Recommended ≥ 1.5.0
 
-✅ With this setup, you can provision reproducible and consistent Azure VMs using Infrastructure as Code.
+✅ With this setup, you can provision reproducible and consistent Azure VMs using Infrastructure as Code (IaC).
