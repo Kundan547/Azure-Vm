@@ -2,13 +2,14 @@
 
 This repository provides a Terraform-based Infrastructure as Code (IaC) setup for provisioning Azure Virtual Machines along with a shell script to configure the VM with required dependencies (like Docker).
 
-📂 Project Structure
-File	Description
-provider.tf	Azure provider configuration. Requires your service principal credentials.
-variables.tf	Defines all input variables used in Terraform configuration.
-terraform.tfvars	Stores variable values (resource group, location, VM size, etc.), keeping them separate from code.
-vm.tf	Main Terraform configuration that provisions Azure VM and associated resources.
-script.sh	Post-provisioning script to update VM and install dependencies (e.g., Docker).
+| File                 | Description                                                                                                            |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **provider.tf**      | Configures the Azure provider using service principal credentials.                                                     |
+| **variables.tf**     | Defines all input variables for the Terraform configuration.                                                           |
+| **terraform.tfvars** | Stores the actual values for variables (e.g., resource group, location, VM size), keeping them separate from the code. |
+| **vm.tf**            | Main Terraform configuration file — provisions the Azure VM and its related resources.                                 |
+| **script.sh**        | Post-provisioning shell script to update the VM and install dependencies (e.g., Docker).                               |
+
 ⚡ Getting Started
 1️⃣ Clone the Repository
 git clone https://github.com/Kundan547/Azure-Vm.git
