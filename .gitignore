@@ -31,3 +31,4 @@ Thumbs.db
 
 # ---- Shell Script Backup ----
 *.sh~
+*.env   
