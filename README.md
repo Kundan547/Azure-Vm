@@ -19,13 +19,15 @@ cd Azure-Vm
 
 2️⃣ Configure Variables
 
-Update terraform.tfvars with your Azure values:
+Update `terraform.tfvars` with your Azure values:
 
+```hcl
 resource_group_name = "my-resource-group"
 location            = "East US"
 vm_size             = "Standard_B1s"
 admin_username      = "azureuser"
 admin_password      = "YourStrongP@ssword!"
+
 
 
 3️⃣ Setup Azure Credentials (Environment Variables)
