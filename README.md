@@ -40,16 +40,16 @@ provider "azurerm" {
 👉 For better security, consider environment variables or Azure Key Vault instead of hardcoding secrets.
 
 🏗️ Deployment Steps
-# Initialize Terraform
+# 1️⃣ Initialize Terraform (downloads providers and modules)
 terraform init
 
-# Validate configuration
+# 2️⃣ Validate the configuration files
 terraform validate
 
-# Preview execution plan
+# 3️⃣ Preview the execution plan
 terraform plan
 
-# Apply and provision resources
+# 4️⃣ Apply the configuration to provision resources
 terraform apply -auto-approve
 
 🗑️ Teardown (Clean Up)
