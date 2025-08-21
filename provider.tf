@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  skip_provider_registration = true
+  skip_provider_registration = none
   client_id                  = "your client id"
   client_secret              = "your client secret"
   tenant_id                  = "your tenant id"
