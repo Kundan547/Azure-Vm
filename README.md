@@ -27,6 +27,7 @@ vm_size             = "Standard_B1s"
 admin_username      = "azureuser"
 admin_password      = "YourStrongP@ssword!"
 
+
 3️⃣ Setup Azure Credentials (Environment Variables)
 
 Instead of hardcoding credentials in provider.tf, export them as environment variables:
