@@ -1,42 +1,30 @@
-Azure VM Setup with Terraform
+🚀 Azure VM Setup with Terraform
 
-This repository contains Terraform configuration files and a helper script to provision and configure Azure Virtual Machines with required tools like Docker.
+This repository provides a Terraform-based Infrastructure as Code (IaC) setup for provisioning Azure Virtual Machines along with a shell script to configure the VM with required dependencies (like Docker).
 
 📂 Project Structure
-
-provider.tf
-Contains the Azure provider configuration. You’ll need to add your Azure credentials here to authenticate Terraform.
-
-variables.tf
-Defines input variables (string types) that are used across the Terraform configuration.
-
-terraform.tfvars
-Holds values for the input variables, keeping them separate from the main configuration files.
-
-vm.tf
-Main Terraform configuration file that provisions the Azure VM and other required resources.
-
-script.sh
-Shell script to update the VM and install required dependencies (e.g., Docker). This script can be executed as part of VM provisioning.
-
-🚀 Usage
-1. Clone the Repository
+File	Description
+provider.tf	Azure provider configuration. Requires your service principal credentials.
+variables.tf	Defines all input variables used in Terraform configuration.
+terraform.tfvars	Stores variable values (resource group, location, VM size, etc.), keeping them separate from code.
+vm.tf	Main Terraform configuration that provisions Azure VM and associated resources.
+script.sh	Post-provisioning script to update VM and install dependencies (e.g., Docker).
+⚡ Getting Started
+1️⃣ Clone the Repository
 git clone https://github.com/Kundan547/Azure-Vm.git
 cd Azure-Vm
 
-2. Configure Variables
+2️⃣ Configure Variables
 
-Update terraform.tfvars with your values (like resource group, location, VM size, etc.).
-
-Example:
+Update terraform.tfvars with your Azure values:
 
 resource_group_name = "my-resource-group"
 location            = "East US"
 vm_size             = "Standard_B1s"
 
-3. Add Azure Credentials
+3️⃣ Add Azure Credentials
 
-Update provider.tf with your Azure service principal credentials:
+Edit provider.tf with your Azure service principal credentials:
 
 provider "azurerm" {
   features {}
@@ -47,30 +35,43 @@ provider "azurerm" {
   tenant_id       = "<your-tenant-id>"
 }
 
-4. Initialize Terraform
+
+👉 For better security, consider environment variables or Azure Key Vault instead of hardcoding secrets.
+
+🏗️ Deployment Steps
+# Initialize Terraform
 terraform init
 
-5. Validate the Configuration
+# Validate configuration
 terraform validate
 
-6. Plan and Apply
+# Preview execution plan
 terraform plan
+
+# Apply and provision resources
 terraform apply -auto-approve
 
-7. Destroy (when no longer needed)
+🗑️ Teardown (Clean Up)
+
+When resources are no longer needed, destroy them to avoid costs:
+
 terraform destroy -auto-approve
 
-🛠 Post-Provisioning
+🔧 Post-Provisioning (VM Setup)
 
-The script.sh can be used to install dependencies (like Docker) inside the VM:
+Run the script to update packages and install dependencies (like Docker):
 
 chmod +x script.sh
 ./script.sh
 
 📌 Notes
 
-Keep your credentials secure. Avoid committing sensitive information into version control.
+🔑 Credentials: Never commit sensitive information (subscription ID, secrets, tenant ID) into version control.
 
-You can use Azure Key Vault or environment variables for better secrets management.
+🛡️ Security: Use Azure Key Vault or environment variables for secret management.
 
-Recommended Terraform version: ≥ 1.5.0
+🌍 Extensibility: You can expand vm.tf to include networking, security groups, storage, and monitoring.
+
+🏗️ Terraform Version: Recommended ≥ 1.5.0
+
+✅ With this setup, you can provision reproducible and consistent Azure VMs using Infrastructure as Code.
