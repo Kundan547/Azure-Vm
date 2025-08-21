@@ -102,11 +102,18 @@ output "ip_address" {
   value = data.azurerm_public_ip.public_ip.ip_address
 }
 
-## Install Docker and Configure Self-Hosted Agent
 resource "null_resource" "install_docker" {
+  provisioner "file" {
+    source      = "${path.module}/script.sh"
+    destination = "/tmp/script.sh"
+  }
+
   provisioner "remote-exec" {
-    inline = ["${file("\\script.sh")}"]
-    #inline = ["${file("D:\\Nagarro\\Pramotions\\InfrastructureCode\\VM\\script.sh")}"]
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh"
+    ]
+
     connection {
       type     = "ssh"
       user     = azurerm_linux_virtual_machine.main.admin_username
@@ -115,6 +122,4 @@ resource "null_resource" "install_docker" {
       timeout  = "10m"
     }
   }
-
-
 }
