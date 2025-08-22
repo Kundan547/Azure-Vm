@@ -27,3 +27,4 @@ cd myagent
 sudo ./svc.sh install
 sudo ./svc.sh start
 exit 0
+
